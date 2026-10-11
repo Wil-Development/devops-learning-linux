@@ -13,9 +13,7 @@ cat ./- to read the file named '-'
 ./ refers to the current directory and makes its clear that - is a filename. Using cat - would make cat wait for an input from the terminal instead
 
 ## Result
-I gained 
+I gained the password from the filename '-' to advance to the next stage to bandit2
 
 ## What I learned
-
-
-## Problems and fixes
+How to read file with that has a dash and ./ helps identify a file in the current directory.
