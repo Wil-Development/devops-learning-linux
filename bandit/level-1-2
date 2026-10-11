@@ -1,16 +1,19 @@
-# Bandit Level  → Level 
+# Bandit Level 1 → Level 2
 
 ## Goal
-
+Reading the file name '-' in the home directory to find the location of the password for the next level
 
 ## Commands used
-
+ls
+cat ./-
 
 ## Explanation
-
+ls to list all the file in the directory
+cat ./- to read the file named '-'
+./ refers to the current directory and makes its clear that - is a filename. Using cat - would make cat wait for an input from the terminal instead
 
 ## Result
-
+I gained 
 
 ## What I learned
 
