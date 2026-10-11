@@ -1,1 +1,23 @@
+# Bandit Level 0 → Level 1
 
+## Goal
+Find the password stored in the readme file.
+
+## Commands used
+​```bash
+ls
+cat readme
+​```
+
+## Explanation
+- `ls` lists files in the current directory.
+- `cat readme` displays the contents of the readme file.
+
+## Result
+I found the password and used it to log into bandit1.
+
+## What I learned
+How to list files and read a text file from the terminal.
+
+## Problems and fixes
+Record any errors and how I solved them.
