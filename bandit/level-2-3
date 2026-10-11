@@ -1,0 +1,24 @@
+# Bandit Level 2  → Level 3
+
+## Goal
+Read the file named --space in this filename-- in the home directory to find the password for the next level
+
+## Commands used
+ls 
+cat ./--space\ in\ this\ filename--
+OR
+cat "./--space in this filename--
+
+## Explanation
+ls list the file in the current directory
+" " the quotation marks keep the filename together as one argument for the systems despite the spaces it has.
+./ identifies the file in the current directories and prevents its leading dashes from being recognised as a command option
+cat displays the file content
+
+## Result
+The file diplayed the password to log into bandit3.
+
+## What I learned
+\ does not mean a space but it tells the shell to treat the next character literally which is known as escaping. as it tells the shell "This space belongs to the filename" otherwise it would make it a seperate filename leading to an error as it does not exist.#
+
+## Screenshot
