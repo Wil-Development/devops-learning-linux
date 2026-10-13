@@ -7,7 +7,7 @@ Read the file named --space in this filename-- in the home directory to find the
 ls 
 cat ./--space\ in\ this\ filename--
 OR
-cat "./--space in this filename--
+cat "./--space in this filename--"
 
 ## Explanation
 ls list the file in the current directory
