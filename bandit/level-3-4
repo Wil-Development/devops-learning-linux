@@ -10,12 +10,13 @@ cd inhere
 cat ...Hiding-From-You
 
 ## Explanation
-ls 
-ls -a
-cd inhere
-cat ...Hiding-From-You
+- 'ls' files in the current directory.
+- 'ls -a' list everything in the directory including the hidden files.
+- 'cd inhere' change directory into 'inhere'
+- 'cat ...Hiding-From-You ' display the content within '...Hiding-From-You'
 
 ## Result
-
+I was able to naviagtre to the inhere directory and find the hidden file to gain access to the password for next level
 
 ## What I learned
+'ls -a' lists all files and directories within the current directory including hidden ones and nammes that starts with a dot '.'
