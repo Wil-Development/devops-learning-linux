@@ -1,0 +1,23 @@
+# Bandit Level 4 → Level 5 
+
+## Goal
+The goal was to locate the password for the next level that is stored in the only human-readable file in the inhere directory
+
+## Commands used
+cd inhere
+ls
+file ./*
+cat ./-file07
+
+## Explanation
+- 'cd inhere' to change directory into inhere
+- 'ls' to list all files in that 'inhere' directory
+- 'file' identifies each file's type
+- ' ./* ' selects all non-hidden files in this directory and handles names starting with ' - ' and together with ' file ./*' it shows me what file type they are and I can pinpoint which one is the human-readable file in the inhere directory
+- 'cat ./-file07' display the content of ' -file07 '
+
+## Result
+Was able to pinpoint the human-readable file and use ' cat ' to display the password so I can move onto the next level
+
+## What I learned
+I learnt the use case of the ' file ' command and ' ./* ' to go with it so I can bring up the different file type that started with a -
