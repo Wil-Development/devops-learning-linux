@@ -1,1 +1,31 @@
+# Bandit Level 5 → Level 6
 
+## Goal
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+human-readable
+1033 bytes in size
+not executable
+
+## Commands used
+- ' cd inhere '
+- ' find . -type f -size 1033c ! -executable '
+- ' ls '
+- ' cat ./maybehere07/.file2 '
+
+## Explanation
+' cd inhere ' change directory to inhere
+' find . ' locate matching files in the current directory and subdirectories 
+' type f ' match regular files only
+' -size 1033c ' with that exact size 
+' ! -executable ' not executable
+' ls ' List content in this directory
+
+## Result
+Gave me the password to the next level 
+
+## What I learned
+I did learn a lot in this level specifically combining different commands in order to get the right requirement to in order the get the password from the goal.
+
+## Problems and fixes
+I was using the wrong commands especially when it came to the expressions but once adding the expression where it needs to be everything clicked and was able to find the password.
