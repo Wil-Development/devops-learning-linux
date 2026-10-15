@@ -8,13 +8,20 @@ owned by group bandit6
 33 bytes in size
 
 ## Commands used
-
+- find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null
+- cat /var/lib/dpkg/info/bandit7.password
 
 ## Explanation
-
+'  find / '
+' -type f '
+' -user bandit7 '
+' -group bandit6 '
+' -size 33c '
+' 2>/dev/null '
+' cat /var/lib/dpkg/info/bandit7.password '
 
 ## Result
-
+When using the cat command above that was linked to the hidden path used by the ' find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null ' 
 
 ## What I learned
 
