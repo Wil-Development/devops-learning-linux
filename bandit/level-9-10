@@ -1,0 +1,19 @@
+# Bandit Level 9 → Level 10 
+
+## Goal
+The goal was to find the password for the next level is stored in the file data.txt, which contains base64 encoded data
+
+## Commands used
+- base64 -d data.txt
+- man base64
+
+## Explanation
+' base64 -d data.txt ' handles Base64 encoding within data.txt
+' -d ' decodes the content within data.txt
+' man base64 ' manual to help me with what command I would need to use.
+
+## Result
+I was able to retrieve the password for the next level.
+
+## What I learned
+I learnt the 'base64' commands and using the 'man base64' allowed me to understand how to decode the password I am searching for.
