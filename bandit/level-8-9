@@ -1,0 +1,17 @@
+# Bandit Level 8 → Level 9
+
+## Goal
+The goal is to find the password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+## Commands used
+-sort data.txt | uniq -u
+
+## Explanation
+- ' sort data.txt ' sort the data that within data.txt.
+- ' uniq -u ' display only one line that occur only once.
+
+## Result
+Combining the command together I was able to retrieve the password to the next level
+
+## What I learned
+The use case of ' sort ' and 'uniq -u' commands to narrow down.
