@@ -12,18 +12,19 @@ owned by group bandit6
 - cat /var/lib/dpkg/info/bandit7.password
 
 ## Explanation
-'  find / '
-' -type f '
-' -user bandit7 '
-' -group bandit6 '
-' -size 33c '
-' 2>/dev/null '
-' cat /var/lib/dpkg/info/bandit7.password '
+'  find / ' (/) check the whole server
+' -type f ' regular files only
+' -user bandit7 ' user owned by bandit7
+' -group bandit6 ' belongs to group bandit6
+' -size 33c ' exactly 33 bytes size
+' 2>/dev/null ' Hides errors such as "Permission denied"
+' cat /var/lib/dpkg/info/bandit7.password ' display the content related to this path
 
 ## Result
-When using the cat command above that was linked to the hidden path used by the ' find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null ' 
+When using ' find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null ' commands that was required in order to find the path of the location of the password for the goal. And following up with the ' cat ' command above allowed me to find the password in question.
 
 ## What I learned
-
+Finding content in the linux property that is owned by different users and group and using it as one command in order to get the password path.
 
 ## Problems and fixes
+The sort of problem I had encounter was I was receiving denied permission and was thinking whether it was linked to ' sudo ' however through the command of ' 2>/dev/null ' it allowed me to by bypass that issue to retrieve the password code.
