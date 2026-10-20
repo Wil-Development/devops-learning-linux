@@ -1,1 +1,21 @@
+# Bandit Level 11 → Level 12
 
+## Goal
+he password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+
+## Commands used
+- cat data.txt | tr 'a-zA-Z' 'n-za-mN-ZA-M'
+
+## Explanation
+- 'cat data.txt' read file data.txt
+- 'tr '[original characters] [replacement characters]'' tr means replace characters with other characters
+- 'a-z' all lowercase letter,a through z
+- 'A-Z' all uppercase letters,A through Z
+- 'n-za-m' n through z, followed by a through m in lower case
+- 'N-ZA-M' N through Z followed by A through M in upper case
+
+## Result
+Was able to receive the password for the next level.
+
+## What I learned
+How to change the position of letters in linux.
