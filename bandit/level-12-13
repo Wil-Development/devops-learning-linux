@@ -1,0 +1,107 @@
+# Bandit Level 12 → Level 13
+
+## Goal
+
+Find the password inside `data.txt`, which contains a hexdump of a file that has been compressed multiple times.
+
+## Commands used
+
+### Create a temporary working directory
+
+workdir=$(mktemp -d)
+cp ~/data.txt "$workdir/"
+cd "$workdir"
+
+### Reverse the hexdump
+
+xxd -r data.txt layer1
+file layer1
+
+Result: gzip compressed data.
+
+### Remove the first compression layers
+
+gzip -dc layer1 > layer2
+file layer2
+
+Result: bzip2 compressed data.
+
+bzip2 -dc layer2 > layer3
+file layer3
+
+Result: gzip compressed data.
+
+gzip -dc layer3 > layer4
+file layer4
+
+Result: POSIX tar archive.
+
+### Inspect and extract the archives
+
+tar -tf layer4
+tar -xvf layer4
+file data5.bin
+
+The archive contained `data5.bin`, which was another tar archive.
+
+tar -tf data5.bin
+tar -xvf data5.bin
+file data6.bin
+
+`data6.bin` was bzip2-compressed. GNU tar automatically handled the compression when reading the archive:
+
+tar -tf data6.bin
+tar -xvf data6.bin
+file data8.bin
+
+Result: `data8.bin` was gzip compressed data.
+
+### Remove the final compression layer
+
+gzip -dc data8.bin > layer9
+file layer9
+
+Result: ASCII text.
+
+cat layer9
+
+## Explanation
+
+- `mktemp -d` creates a unique temporary directory.
+- `workdir=$(...)` stores the directory path in a variable.
+- `cp` copies the challenge file into that directory.
+- `xxd -r` converts the hexdump back into its original binary form.
+- `file` identifies a file's format from its contents.
+- `gzip -dc` decompresses gzip data and sends the result to standard output.
+- `bzip2 -dc` does the same for bzip2 data.
+- `>` saves the output into a file. It overwrites that output file if it already exists.
+- `tar -tf` lists the files inside an archive without extracting them.
+- `tar -xvf` extracts the archive and displays the extracted filenames.
+- `cat` displays the contents of the final text file.
+
+## Why I repeated the steps
+
+The file had several layers of compression and archives. Removing one layer exposed another file that still needed unpacking.
+
+After each step, I used `file` again to decide which tool to use next. Some formats appeared more than once.
+
+`layer9` was simply a filename I chose. The indicator to stop unpacking was the `ASCII text` result. Reading it with `cat` then confirmed it contained the password.
+
+## Errors and fixes
+
+- I initially used `>` with `cp`. Copying requires a source and destination: `cp ~/data.txt "$workdir/"`.
+- `tar -tf` only lists archive contents. I needed to extract the archive before inspecting the file inside.
+- I sometimes checked an earlier file instead of the newly extracted one.
+- `file layer 9` checks two separate filenames. The correct command was `file layer9`.
+
+## Result
+
+I successfully recovered the password for Level 13.
+
+## What I learned
+
+- How to reverse a hexdump.
+- How to identify and unpack gzip, bzip2 and tar files.
+- File extensions such as `.bin` do not reliably identify the actual format.
+- Repeating inspection after each extraction helps avoid guessing.
+- Keeping clear filenames makes multiple layers easier to track.
