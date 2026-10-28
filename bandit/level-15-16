@@ -1,0 +1,27 @@
+# Bandit Level 15 → Level 16
+
+## Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+
+## Commands used
+- whoami
+- cat /etc/bandit_pass/bandit15
+- man openssl
+- openssl s_client -connect localhost:30001 
+
+## Explanation
+- whoami this tells me who I am signed up as and it was bandit15
+- cat /etc/bandit_pass/bandit15 to display the password of the previous level since I will need it for this level
+- man openssl this shows a manual for the openssl since I needed a better understanding of SSL encryption
+- openssl is a tool for working with encryption and certificates
+- s_client and essentially saying to start a tls client
+- -connect localhost:30001 means connects to port 30001 on this machine
+
+## Result
+I received very output from the full code but once I inserted the previous password I got it correct and presented the password to the next level
+
+## What I learned
+the use case for openssl, s_client and using the command -connect when trying to access a seperate port.
+
+## Problems and fixes
+I was unable to connect to the localhost due to missing commands but the man command helped me find what I was looking for with the help of the goal by breaking down what it is asking of me.
