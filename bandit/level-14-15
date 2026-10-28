@@ -1,0 +1,20 @@
+# Bandit Level 14 → Level 15
+
+## Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost
+
+## Commands used
+whoami
+cat /etc/bandit_pass/bandit14
+nc localhost 30000
+
+## Explanation
+- 'whoami' tells me who I am login as
+- ' cat /etc/bandit_pass/bandit14 ' give me the password from the previous level 
+- ' nc localhost 3000 ' nc stands for netcat and it allows me to connect to port 30000 on the localhost
+
+## Result
+After I put in the password of the previous level to enter port 30000 I was confirmed with a 'correct' and it gave me the password for level 15 
+
+## What I learned
+I learnt the use case of netcat when changing to a different port.
