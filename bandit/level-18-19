@@ -1,0 +1,75 @@
+# Bandit Level 18 → Level 19
+
+## Goal
+
+Read the `readme` file in bandit18’s home directory to retrieve the bandit19 password.
+
+The challenge is that `.bashrc` has been modified to log me out when I open a normal SSH session.
+
+## Commands used
+
+From my Ubuntu terminal:
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org "ls"
+ssh -p 2220 bandit18@bandit.labs.overthewire.org "cat readme"
+ssh -p 2220 bandit19@bandit.labs.overthewire.org
+
+After logging in as bandit19:
+
+whoami
+
+## Explanation
+
+### 1. Identify the login problem
+
+A normal SSH login displayed `Byebye!` and disconnected me.
+
+The level instructions explained that `.bashrc`, a Bash startup file, had been modified to cause this.
+
+My approach was to run a command directly through SSH instead of opening an interactive session.
+
+### 2. List the remote files
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org "ls"
+
+- `-p 2220` specifies Bandit’s SSH port.
+- `bandit18` is the account used to connect.
+- `"ls"` tells SSH to execute that command on the remote server.
+
+I entered the bandit18 password. The command listed the files, including `readme`, then the connection closed because the command had finished.
+
+### 3. Read the password file
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org "cat readme"
+
+This used the same method to display the contents of `readme`.
+
+The output contained the bandit19 password.
+
+### 4. Log in as bandit19
+
+ssh -p 2220 bandit19@bandit.labs.overthewire.org
+
+I entered the retrieved password and checked my account:
+
+whoami
+
+Expected output:
+
+bandit19
+
+## Result
+
+I retrieved the password by running `cat readme` directly through SSH and used it to access bandit19.
+
+## What I learned
+
+- SSH can execute individual commands on a remote machine.
+- An interactive session is not always needed to complete a task.
+- Shell startup files can affect login behaviour.
+- When a remote command finishes, SSH normally closes the connection.
+
+## Problems and fixes
+
+- **Normal login immediately disconnected me:** I supplied a command at the end of the SSH command.
+- **The connection closed after showing the file:** This was expected because the remote command had finished.
