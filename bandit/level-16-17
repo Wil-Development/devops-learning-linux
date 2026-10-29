@@ -1,18 +1,97 @@
-# Bandit Level  → Level 
+# Bandit Level 16 → Level 17
 
 ## Goal
 
+Find the service listening on localhost between ports 31000 and 32000 that returns the next level’s credentials when given the bandit16 password.
+
+Some services use SSL/TLS, and others only repeat the input.
 
 ## Commands used
 
+Inside my bandit16 session:
 
+whoami
+cat /etc/bandit_pass/bandit16
+nmap -sV -p 31000-32000 localhost
+openssl s_client -connect localhost:31518 -quiet
+openssl s_client -connect localhost:31790 -quiet
+
+
+After receiving the private key, I opened a terminal on my Ubuntu VM:
+
+nano bandit17.key
+chmod 600 bandit17.key
+ssh -i bandit17.key -p 2220 bandit17@bandit.labs.overthewire.org
+
+
+After logging in:
+
+whoami
 ## Explanation
 
+### 1. Confirm my account
+
+I used `whoami` to confirm I was logged in as bandit16.
+
+I then read `/etc/bandit_pass/bandit16` to get the current password that the service required.
+
+### 2. Find the listening ports
+
+nmap -sV -p 31000-32000 localhost
+
+- `-sV` attempts to identify the services running on open ports.
+- `-p 31000-32000` limits the scan to the challenge’s port range.
+- `localhost` refers to the Bandit server because I ran the command inside my SSH session.
+
+I looked for open ports and services identified as using SSL/TLS.
+
+### 3. Test the TLS services
+
+
+openssl s_client -connect localhost:31790 -quiet
+
+- `s_client` connects as an SSL/TLS client.
+- `-connect` specifies the destination and port.
+- `-quiet` reduces connection output.
+
+I entered my bandit16 password and pressed Enter.
+
+Port 31518 repeated my input, showing it was an echo service.
+
+Port 31790 checked the password. After I submitted the correct password, it returned an SSH private key for bandit17.
+
+### 4. Save and use the private key
+
+On my Ubuntu VM, I created `bandit17.key` using Nano and pasted the complete key, including its BEGIN and END lines.
+
+' chmod 600 bandit17.key '
+
+This gives my user read and write access while removing access for other users.
+
+ssh -i bandit17.key -p 2220 bandit17@bandit.labs.overthewire.org
+
+- `-i` selects the private key used for authentication.
+- `-p 2220` specifies Bandit’s SSH port.
+- `bandit17` is the account I want to access.
 
 ## Result
 
+I identified the correct service, retrieved the SSH private key, and used it to log in as bandit17.
+
+I verified the login with `whoami`, which returned `bandit17`.
 
 ## What I learned
 
+- How to scan a specific port range with Nmap.
+- How to connect to a TLS service using OpenSSL.
+- An encrypted connection does not prove I found the correct service; I must inspect its response.
+- An echo service repeats whatever I send.
+- SSH can authenticate using a private key.
+- A key’s filename is not a password.
+- Commands must run on the correct machine: localhost refers to whichever machine runs the command.
 
 ## Problems and fixes
+
+- **Port 31518 repeated my password:** It was an echo service, so I tested another TLS port.
+- **Port 31790 returned “Wrong!”:** I retrieved the current bandit16 password and submitted it again.
+- **Permission denied during SSH login:** I checked that the key was saved on my Ubuntu VM, contained the complete key, and had permissions set to `600`.
