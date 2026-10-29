@@ -1,0 +1,72 @@
+# Bandit Level 17 → Level 18
+
+## Goal
+
+Find the password for bandit18 by comparing `passwords.old` and `passwords.new`.
+
+The password is the only changed line in `passwords.new`.
+
+## Commands used
+
+Inside my bandit17 session:
+
+whoami
+ls
+diff passwords.old passwords.new
+
+From my Ubuntu terminal:
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org
+
+## Explanation
+
+### 1. Confirm my account and locate the files
+
+I used `whoami` to check that I was logged in as bandit17.
+
+I then used `ls` to locate `passwords.old` and `passwords.new`.
+
+### 2. Compare the files
+
+diff passwords.old passwords.new
+
+`diff` compares two files and displays their differences.
+
+Example output:
+
+42c42
+< old password
+---
+> new password
+
+- `42c42` means line 42 in the first file changed to line 42 in the second file. The actual line number may differ.
+- `<` identifies the line from `passwords.old`.
+- `>` identifies the line from `passwords.new`.
+
+Because the goal specified the changed line in `passwords.new`, I selected the text after `>`.
+
+I copied only the password, excluding the `>` symbol and the space after it.
+
+### 3. Connect to bandit18
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org
+
+I used the new password to authenticate as bandit18.
+
+## Result
+
+I identified the changed line containing the bandit18 password.
+
+Logging in to bandit18 may display `Byebye!` and close the connection. This behaviour is part of the next challenge.
+
+## What I learned
+
+- How to compare files using `diff`.
+- How the order of the filenames determines the meaning of `<` and `>`.
+- How to identify a changed line without reading both files manually.
+- A connection closing after authentication does not always mean the password was incorrect.
+
+## Problems and fixes
+
+- **Unsure which line contained the password:** I checked the file order. Since `passwords.new` was second, its changed line appeared after `>`.
+- **Disconnected after seeing `Byebye!`:** This is expected for bandit18 and is the problem to investigate in the next level.
